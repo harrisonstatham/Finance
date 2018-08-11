@@ -1,12 +1,16 @@
 ﻿using System;
 
+using HarrisonFinance.Core.Quandl;
+
 namespace HarrisonFinance
 {
     class MainClass
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var Quandl = CQuandl.GetInstance();
+
+
         }
     }
 }
