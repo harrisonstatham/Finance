@@ -45,11 +45,21 @@
     <Reference Include="MathNet.Filtering">
       <HintPath>..\packages\MathNet.Filtering.0.4.0\lib\net40\MathNet.Filtering.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Quandl\Quandl.cs" />
+    <Compile Include="Core\Quandl\TimeSeries.cs" />
+    <Compile Include="Core\Quandl\CQuandlQueryBuilder.cs" />
+    <Compile Include="Core\Quandl\Enums\eTimeSeriesOrder.cs" />
+    <Compile Include="Core\Quandl\Enums\eTimeSeriesCollapse.cs" />
+    <Compile Include="Core\Quandl\Enums\eTimeSeriesTransform.cs" />
+    <Compile Include="Core\Quandl\Enums\eTimeSeriesExtMethods.cs" />
+    <Compile Include="Core\Quandl\CTimeSeriesFromJson.cs" />
+    <Compile Include="Core\Quandl\CTimeSeriesData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -61,6 +71,7 @@
     <Folder Include="Core\" />
     <Folder Include="Common\" />
     <Folder Include="Core\Quandl\" />
+    <Folder Include="Core\Quandl\Enums\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

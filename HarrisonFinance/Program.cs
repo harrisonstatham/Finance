@@ -10,7 +10,11 @@ namespace HarrisonFinance
         {
             var Quandl = CQuandl.GetInstance();
 
+            var QB = new CQuandlQueryBuilder(Quandl.ApiKey);
 
+            var Results = Quandl.GetTimeSeries(QB);
+
+            Console.WriteLine(Results);
         }
     }
 }
