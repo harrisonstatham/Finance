@@ -7,38 +7,12 @@ using System.IO;
 using System.Net.Http;
 using Newtonsoft.Json;
 
+using HarrisonFinance.Core.Quandl.Interfaces;
+
 namespace HarrisonFinance.Core.Quandl
 {
     public class CQuandl
     {
-        #region Singleton
-
-        /// <summary>
-        /// The instance.
-        /// </summary>
-        private static CQuandl Instance = null;
-
-
-        /// <summary>
-        /// Gets the instance.
-        /// </summary>
-        /// <returns>The instance.</returns>
-        public static CQuandl GetInstance()
-        {
-            if (Instance == null)
-            {
-                // Here we pull the ApiKey from a file. This prevents Github from
-                // seeing my ApiKey. Ideally, this would just be hardcoded in.
-                var ApiKey = System.IO.File.ReadAllText(@"/Users/harrison/Projects/HarrisonFinance/HarrisonFinance/QuandlApiKey.txt");
-
-                Instance = new CQuandl(ApiKey.Trim());
-            }
-
-            return Instance;
-        }
-
-        #endregion
-
         #region Private Members
 
         private string mApiKey = "";
@@ -55,7 +29,7 @@ namespace HarrisonFinance.Core.Quandl
 
         #region Constructors
 
-        private CQuandl(string ApiKey)
+        public CQuandl(string ApiKey)
         {
             mApiKey = ApiKey;
         }
@@ -70,16 +44,18 @@ namespace HarrisonFinance.Core.Quandl
         /// Gets the time series.
         /// </summary>
         /// <returns>The time series.</returns>
-        /// <param name="QueryBuilder">Query builder.</param>
-        public CTimeSeries GetTimeSeries(CQuandlQueryBuilder QueryBuilder)
+        ///
+        public CTimeSeries GetTimeSeries(CTimeSeriesRequest Request)
         {
-            var Result = QueryTimeSeries(QueryBuilder);
+            var Result = QueryTimeSeries(Request.GetURL());
 
             var Json = Result.Result;
 
+            Console.WriteLine(Json);
+
             CTimeSeriesFromJson Deserialized = null;
 
-            if(Json != null)
+            if (Json != null)
             {
                 // Remove some text to make it easier for the JSON parser.
 
@@ -88,13 +64,45 @@ namespace HarrisonFinance.Core.Quandl
                 Json = Json.Remove(Json.Length - 1);
 
                 Deserialized = JsonConvert.DeserializeObject<CTimeSeriesFromJson>(Json);
+
+
             }
 
             return (Deserialized == null) ? new CTimeSeries() : Deserialized.ConvertToTimeSeries();
         }
 
 
+
+
+
+
+
+
+
+
+        #if DEBUG
+        public string BuildURL(IQuandlRequest Request)
+        {
+            string NewURL = Request.GetURL();
+
+            if (NewURL.Contains("?") && NewURL.Contains("&"))
+            {
+                NewURL += "&api_key=" + mApiKey;
+            }
+            else
+            {
+                NewURL += "?api_key=" + mApiKey;
+            }
+
+            return NewURL;
+        }
+        #endif
+
+
+
         #endregion
+
+
 
 
         #region Private Methods
@@ -104,15 +112,29 @@ namespace HarrisonFinance.Core.Quandl
         /// Queries the time series.
         /// </summary>
         /// <returns>The time series.</returns>
-        /// <param name="QueryBuilder">Query builder.</param>
-        private async Task<string> QueryTimeSeries(CQuandlQueryBuilder QueryBuilder)
+        /// <param name="URL">URL.</param>
+        private async Task<string> QueryTimeSeries(string URL)
         {
+            // Append the API key.
+
+            string NewURL = URL;
+
+            if (URL.Contains("?") && URL.Contains("&"))
+            {
+                NewURL += "&api_key=" + mApiKey;
+            }
+            else
+            {
+                NewURL += "?api_key=" + mApiKey;
+            }
+
+
             var client = new HttpClient();
 
-            try 
+            try
             {
                 // Get the response.
-                HttpResponseMessage response = await client.GetAsync(QueryBuilder.GetURL());
+                HttpResponseMessage response = await client.GetAsync(NewURL);
 
                 // Get the response content.
                 HttpContent responseContent = response.Content;
@@ -120,8 +142,8 @@ namespace HarrisonFinance.Core.Quandl
                 var reader = new StreamReader(await responseContent.ReadAsStreamAsync());
 
                 return await reader.ReadToEndAsync();
-            } 
-            catch(HttpRequestException e)
+            }
+            catch (HttpRequestException e)
             {
                 Console.WriteLine(e.Message);
 
@@ -129,6 +151,8 @@ namespace HarrisonFinance.Core.Quandl
 
             return null;
         }
+
+
 
         #endregion
 

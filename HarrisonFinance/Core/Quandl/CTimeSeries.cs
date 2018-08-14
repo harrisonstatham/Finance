@@ -157,6 +157,7 @@ namespace HarrisonFinance.Core.Quandl
 
         public CTimeSeries()
         {
+            Data = new List<CTimeSeriesData>();
         }
 
 

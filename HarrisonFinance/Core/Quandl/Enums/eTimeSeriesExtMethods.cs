@@ -40,18 +40,25 @@ namespace HarrisonFinance.Core.Quandl.Enums
         {
             eTimeSeriesOrder Order;
 
-            switch (TheStr.Trim().ToLower())
+            if (TheStr == null)
             {
-                case "asc":
-                    Order = eTimeSeriesOrder.Asc;
-                    break;
+                Order = eTimeSeriesOrder.Desc;
+            }
+            else
+            {
+                switch (TheStr.Trim().ToLower())
+                {
+                    case "asc":
+                        Order = eTimeSeriesOrder.Asc;
+                        break;
 
 
-                case "desc":
-                default:
-                    Order = eTimeSeriesOrder.Desc;
-                    break;
+                    case "desc":
+                    default:
+                        Order = eTimeSeriesOrder.Desc;
+                        break;
 
+                }
             }
 
             return Order;
@@ -109,33 +116,40 @@ namespace HarrisonFinance.Core.Quandl.Enums
         {
             eTimeSeriesCollapse Collapse;
 
-            switch (TheStr.Trim().ToLower())
+            if (TheStr == null)
             {
-                case "annual":
-                    Collapse = eTimeSeriesCollapse.Annual;
-                    break;
+                Collapse = eTimeSeriesCollapse.None;
+            }
+            else
+            {
+                switch (TheStr.Trim().ToLower())
+                {
+                    case "annual":
+                        Collapse = eTimeSeriesCollapse.Annual;
+                        break;
 
-                case "daily":
-                default:
-                    Collapse = eTimeSeriesCollapse.Daily;
-                    break;
+                    case "daily":
+                    default:
+                        Collapse = eTimeSeriesCollapse.Daily;
+                        break;
 
-                case "monthly":
-                    Collapse = eTimeSeriesCollapse.Monthly;
-                    break;
+                    case "monthly":
+                        Collapse = eTimeSeriesCollapse.Monthly;
+                        break;
 
-                case "none":
-                    Collapse = eTimeSeriesCollapse.None;
-                    break;
+                    case "none":
+                        Collapse = eTimeSeriesCollapse.None;
+                        break;
 
-                case "quarterly":
-                    Collapse = eTimeSeriesCollapse.Quarterly;
-                    break;
+                    case "quarterly":
+                        Collapse = eTimeSeriesCollapse.Quarterly;
+                        break;
 
-                case "weekly":
-                    Collapse = eTimeSeriesCollapse.Weekly;
-                    break;
+                    case "weekly":
+                        Collapse = eTimeSeriesCollapse.Weekly;
+                        break;
 
+                }
             }
 
             return Collapse;
@@ -188,35 +202,43 @@ namespace HarrisonFinance.Core.Quandl.Enums
         {
             eTimeSeriesTransform Transform;
 
-            switch (TheStr.Trim().ToLower())
+            if (TheStr == null)
             {
-                case "annual":
-                    Transform = eTimeSeriesTransform.Cumulative;
-                    break;
+                Transform = eTimeSeriesTransform.None;
+            }
+            else
+            {
+                
+                switch (TheStr.Trim().ToLower())
+                {
+                    case "annual":
+                        Transform = eTimeSeriesTransform.Cumulative;
+                        break;
 
-                case "daily":
-                default:
-                    Transform = eTimeSeriesTransform.Differential;
-                    break;
+                    case "daily":
+                    default:
+                        Transform = eTimeSeriesTransform.Differential;
+                        break;
 
-                case "monthly":
-                    Transform = eTimeSeriesTransform.None;
-                    break;
+                    case "monthly":
+                        Transform = eTimeSeriesTransform.None;
+                        break;
 
-                case "none":
-                    Transform = eTimeSeriesTransform.Normalize;
-                    break;
+                    case "none":
+                        Transform = eTimeSeriesTransform.Normalize;
+                        break;
 
-                case "quarterly":
-                    Transform = eTimeSeriesTransform.RDifferential;
-                    break;
+                    case "quarterly":
+                        Transform = eTimeSeriesTransform.RDifferential;
+                        break;
 
-                case "weekly":
-                    Transform = eTimeSeriesTransform.RDiffFrom;
-                    break;
+                    case "weekly":
+                        Transform = eTimeSeriesTransform.RDiffFrom;
+                        break;
+
+                }
 
             }
-
             return Transform;
         }
 

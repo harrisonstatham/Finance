@@ -1,4 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections;
+using HarrisonFinance.Core.Quandl.Enums;
+
+using HarrisonFinance.Common.Utilities;
+
 namespace HarrisonFinance.Core.Quandl
 {
     /// <summary>
@@ -61,7 +67,12 @@ namespace HarrisonFinance.Core.Quandl
 
             Result.Frequency = frequency;
             Result.Type = type;
-            Result.IsPremium = (premium.Trim().ToLower() == "true");
+
+            if(premium != null)
+            {
+                Result.IsPremium = (premium.Trim().ToLower() == "true");
+            }
+
 
             // Do I need to copy them???
             Result.StartDate = start_date;
@@ -70,12 +81,14 @@ namespace HarrisonFinance.Core.Quandl
             Result.NewestAvailableDate = newest_available_date;
             Result.OldestAvailableDate = oldest_available_date;
 
-
+            Console.WriteLine(data);
 
             // Handle the data
             // We create a CTimeSeriesData object foreach list.
             foreach (var TheList in data)
             {
+                SCListUtilities.Print<string>(TheList);
+
                 Result.Data.Add(CTimeSeriesData.ParseFromStringList(TheList));
             }
 
