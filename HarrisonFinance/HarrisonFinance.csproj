@@ -54,16 +54,17 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Quandl\CQuandl.cs" />
-    <Compile Include="Core\Quandl\CTimeSeries.cs" />
     <Compile Include="Core\Quandl\Enums\eTimeSeriesOrder.cs" />
     <Compile Include="Core\Quandl\Enums\eTimeSeriesCollapse.cs" />
     <Compile Include="Core\Quandl\Enums\eTimeSeriesTransform.cs" />
     <Compile Include="Core\Quandl\Enums\eTimeSeriesExtMethods.cs" />
-    <Compile Include="Core\Quandl\CTimeSeriesFromJson.cs" />
-    <Compile Include="Core\Quandl\CTimeSeriesData.cs" />
     <Compile Include="Common\Utilities\SCListUtilities.cs" />
-    <Compile Include="Core\Quandl\CTimeSeriesRequest.cs" />
     <Compile Include="Core\Quandl\Interfaces\IQuandlRequest.cs" />
+    <Compile Include="Core\Quandl\TimeSeries\CTimeSeriesMeta.cs" />
+    <Compile Include="Core\Quandl\TimeSeries\CTimeSeries.cs" />
+    <Compile Include="Core\Quandl\TimeSeries\CTimeSeriesRequest.cs" />
+    <Compile Include="Core\Quandl\TimeSeries\CTimeSeriesData.cs" />
+    <Compile Include="Core\Quandl\TimeSeries\CTimeSeriesFromJson.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -79,6 +80,7 @@
     <Folder Include="Common\Utilities\" />
     <Folder Include="Common\Database\" />
     <Folder Include="Core\Quandl\Interfaces\" />
+    <Folder Include="Core\Quandl\TimeSeries\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

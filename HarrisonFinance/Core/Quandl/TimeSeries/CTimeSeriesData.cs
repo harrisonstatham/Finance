@@ -9,6 +9,7 @@ namespace HarrisonFinance.Core.Quandl
 
     public class CTimeSeriesData
     {
+        #region Public Members
 
         /// <summary>
         /// Gets or sets the date.
@@ -100,7 +101,18 @@ namespace HarrisonFinance.Core.Quandl
         /// <value>The adj volume.</value>
         public double AdjVolume { get; set; }
 
+        #endregion
 
+
+        #region Override Methods
+
+        public override string ToString()
+        {
+            return "Date: \t\t Open: \t\t Close: \t\t High: \t\t Low: \t\t Volume: \n" + 
+                string.Format("{0} \t\t {1} \t\t {2} \t\t {3} \t\t {4} \t\t {5} \n", Date, Open, Close, High, Low, Volume);
+        }
+
+        #endregion
 
 
         /// <summary>

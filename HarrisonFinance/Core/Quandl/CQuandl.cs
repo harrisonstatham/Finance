@@ -51,7 +51,7 @@ namespace HarrisonFinance.Core.Quandl
 
             var Json = Result.Result;
 
-            Console.WriteLine(Json);
+            //Console.WriteLine(Json);
 
             CTimeSeriesFromJson Deserialized = null;
 
@@ -68,7 +68,14 @@ namespace HarrisonFinance.Core.Quandl
 
             }
 
-            return (Deserialized == null) ? new CTimeSeries() : Deserialized.ConvertToTimeSeries();
+            if(Deserialized == null)
+            {
+                return new CTimeSeries(Request);
+            }
+            else
+            {
+                return Deserialized.ConvertToTimeSeries(Request);
+            }
         }
 
 

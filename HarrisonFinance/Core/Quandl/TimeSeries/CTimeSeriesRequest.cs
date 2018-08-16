@@ -61,6 +61,45 @@ namespace HarrisonFinance.Core.Quandl
             Transform = eTimeSeriesTransform.None;
         }
 
+        public CTimeSeriesRequest(string TheDatabaseCode,
+                                  string TheDatasetCode,
+                                  int? TheLimit,
+                                  int? TheColumnIndex,
+                                  DateTime? TheStartDate,
+                                  DateTime? TheEndDate,
+                                  eTimeSeriesOrder TheOrder, 
+                                  eTimeSeriesCollapse TheCollapse, 
+                                  eTimeSeriesTransform TheTransform)
+        {
+            // Assign default parameters
+            DatabaseCode = TheDatabaseCode;
+            DatasetCode = TheDatasetCode;
+
+            Limit = TheLimit;
+            ColumnIndex = TheColumnIndex;
+            StartDate = TheStartDate;
+            EndDate = TheEndDate;
+
+            Order = TheOrder;
+            Collapse = TheCollapse;
+            Transform = TheTransform;
+        }
+
+        public CTimeSeriesRequest(CTimeSeriesRequest Copy) 
+            : this(Copy.DatabaseCode, 
+                   Copy.DatasetCode, 
+                   Copy.Limit, 
+                   Copy.ColumnIndex, 
+                   Copy.StartDate, 
+                   Copy.EndDate, 
+                   Copy.Order,
+                   Copy.Collapse,
+                   Copy.Transform)
+        {
+            
+        }
+
+
         #endregion
 
 
