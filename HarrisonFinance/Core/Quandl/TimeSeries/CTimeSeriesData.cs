@@ -114,46 +114,5 @@ namespace HarrisonFinance.Core.Quandl
 
         #endregion
 
-
-        /// <summary>
-        /// Parses from string list.
-        /// </summary>
-        /// <returns>The from string list.</returns>
-        /// <param name="SomeList">Some list.</param>
-        public static CTimeSeriesData ParseFromStringList(IList<string> SomeList)
-        {
-            CTimeSeriesData Data = new CTimeSeriesData();
-
-            DateTime TempDate;
-            double TempOpenPrice = 0.0;
-            double TempLowPrice = 0.0;
-            double TempHighPrice = 0.0;
-
-            if (DateTime.TryParse(SomeList[0], out TempDate))
-            {
-                Data.Date = TempDate;
-            }
-            else
-            {
-                Data.Date = new DateTime();
-            }
-
-            if (double.TryParse(SomeList[1], out TempOpenPrice))
-            {
-                Data.Open = TempOpenPrice;
-            }
-
-            if (double.TryParse(SomeList[2], out TempHighPrice))
-            {
-                Data.High = TempHighPrice;
-            }
-
-            if (double.TryParse(SomeList[3], out TempLowPrice))
-            {
-                Data.Low = TempLowPrice;
-            }
-
-            return Data;
-        }
     }
 }

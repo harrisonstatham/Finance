@@ -38,7 +38,7 @@ namespace HarrisonFinance
             // Go fetch the results from Quandl.
             var Results = Quandl.GetTimeSeries(TimeSeriesRequest);
 
-            SCListUtilities.Print(Results.Data);
+            Console.WriteLine(Results);
 
         }
     }

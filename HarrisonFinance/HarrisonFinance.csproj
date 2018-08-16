@@ -65,6 +65,7 @@
     <Compile Include="Core\Quandl\TimeSeries\CTimeSeriesRequest.cs" />
     <Compile Include="Core\Quandl\TimeSeries\CTimeSeriesData.cs" />
     <Compile Include="Core\Quandl\TimeSeries\CTimeSeriesFromJson.cs" />
+    <Compile Include="Core\Quandl\TimeSeries\SCTimeSeriesUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

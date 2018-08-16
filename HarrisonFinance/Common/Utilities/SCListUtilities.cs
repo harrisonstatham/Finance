@@ -17,5 +17,14 @@ namespace HarrisonFinance.Common.Utilities
             Console.WriteLine("]");
         }
 
+
+        public static void PrintBasic<T>(IList<T> TheList)
+        {
+            for (int i = 0; i < TheList.Count; i++)
+            {
+                Console.WriteLine(TheList[i]);
+            }
+        }
+
     }
 }

@@ -5,7 +5,7 @@ using HarrisonFinance.Core.Quandl.Enums;
 
 namespace HarrisonFinance.Core.Quandl
 {
-    
+
     //--------------------------------------------------------------------------
     //
     //--------------------------------------------------------------------------
@@ -54,6 +54,21 @@ namespace HarrisonFinance.Core.Quandl
 
         #endregion
 
+        #region Override Methods
 
+        public override string ToString()
+        {
+            var TheStr = "Date: \t\t Open: \t\t Close: \t\t High: \t\t Low: \t\t Volume: \n";
+
+
+            foreach (var Item in Data)
+            {
+                TheStr += string.Format("{0} \t\t {1} \t\t {2} \t\t {3} \t\t {4} \t\t {5} \n", Item.Date, Item.Open, Item.Close, Item.High, Item.Low, Item.Volume);
+            }
+
+            return TheStr;
+        }
+
+        #endregion
     }
 }

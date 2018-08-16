@@ -74,7 +74,7 @@ namespace HarrisonFinance.Core.Quandl
             }
             else
             {
-                return Deserialized.ConvertToTimeSeries(Request);
+                return SCTimeSeriesUtilities.ConvertToTimeSeries(Deserialized, Request);
             }
         }
 
