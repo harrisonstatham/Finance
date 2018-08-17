@@ -18,43 +18,55 @@ namespace HarrisonFinance.Core.AbstractClasses
 {
     public abstract class ACFinancialObject
     {
-        
-        #region Private Members
+
+        #region Protected Members
+
+        /// <summary>
+        /// The name of the object.
+        /// </summary>
+        protected string mName;
+
+
+        /// <summary>
+        /// The description of the object.
+        /// </summary>
+        protected string mDescription;
+
 
         /// <summary>
         /// The price of a financial object.
         /// </summary>
-        private double mPrice;
+        protected double mPrice;
 
 
         /// <summary>
         /// An evolution of prices stored by date.
         /// </summary>
-        private IDictionary<DateTime, double> mPriceHistory;
+        protected IDictionary<DateTime, double> mPriceHistory;
 
 
         /// <summary>
         /// The currency.
         /// </summary>
-        private eCurrency mCurrency;
+        protected eCurrency mCurrency;
 
 
         /// <summary>
         /// The date of acquisition/sale.
         /// </summary>
-        private DateTime mDate;
+        protected DateTime mDate;
 
 
         /// <summary>
         /// The depreciation rate of the asset.
         /// </summary>
-        private double mDepreciationRate = 0.0;
+        protected double mDepreciationRate = 0.0;
 
 
         /// <summary>
         /// The appreciation rate of the asset.
         /// </summary>
-        private double mAppreciationRate = 0.0;
+        protected double mAppreciationRate = 0.0;
 
         #endregion
 
@@ -121,7 +133,7 @@ namespace HarrisonFinance.Core.AbstractClasses
             set
             {
                 // If the value is >= 0.0 then we have a depreciating asset.
-                if(value >= 0.0)
+                if (value >= 0.0)
                 {
 
                     // If we have an appreciation rate in place, then we need to subtract
@@ -129,7 +141,7 @@ namespace HarrisonFinance.Core.AbstractClasses
                     var Temp = mAppreciationRate - value;
 
                     // If the appreciation rate is greater than 
-                    if(Temp >= 0.0)
+                    if (Temp >= 0.0)
                     {
                         mAppreciationRate = Temp;
                         mDepreciationRate = 0.0;
@@ -213,5 +225,17 @@ namespace HarrisonFinance.Core.AbstractClasses
 
 
         #endregion
+
+
+        #region Public Methods
+
+        public void ConvertToCurrency(eCurrency ConvertTo)
+        {
+            mPrice = mPrice.ConvertToDifferentCurrency(mCurrency, ConvertTo);
+            mCurrency = ConvertTo;
+        }
+
+        #endregion
+
     }
 }

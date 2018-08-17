@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 
 using HarrisonFinance.Core.AbstractClasses;
+using HarrisonFinance.Core.Enums;
 
 namespace HarrisonFinance.Core.FinancialStatements
 {
@@ -19,7 +20,7 @@ namespace HarrisonFinance.Core.FinancialStatements
         /// <summary>
         /// The group of assets.
         /// </summary>
-        public IList<ACAsset> Assets;
+        private IList<ACAsset> Assets;
 
 
         /// <summary>

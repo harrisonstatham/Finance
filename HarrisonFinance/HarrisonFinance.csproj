@@ -101,6 +101,14 @@
     <Compile Include="Core\AbstractClasses\ACCurrency.cs" />
     <Compile Include="Core\Enums\eCurrency.cs" />
     <Compile Include="Common\Enum\EnumExtensions.cs" />
+    <Compile Include="Core\Enums\eAssetEnums.cs" />
+    <Compile Include="Core\Enums\eLiquidity.cs" />
+    <Compile Include="Core\CCash.cs" />
+    <Compile Include="Core\Double\DoubleExtension.cs" />
+    <Compile Include="Common\NumberWithUnits\CNumberWithUnit.cs" />
+    <Compile Include="Common\NumberWithUnits\eSIUnit.cs" />
+    <Compile Include="Common\NumberWithUnits\eUnit.cs" />
+    <Compile Include="Common\NumberWithUnits\eUnitOperationLUT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -119,6 +127,9 @@
     <Folder Include="Core\AbstractClasses\" />
     <Folder Include="Core\Enums\" />
     <Folder Include="Common\Enum\" />
+    <Folder Include="Common\Double\" />
+    <Folder Include="Core\Double\" />
+    <Folder Include="Common\NumberWithUnits\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

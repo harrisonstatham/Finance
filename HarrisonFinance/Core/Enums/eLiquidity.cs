@@ -1,5 +1,5 @@
 ﻿// ===========================================================
-//   CAsset.cs
+//   eLiquidity.cs
 //
 //   Harrison Statham
 //   Copyright Harrison Statham 2018
@@ -8,15 +8,13 @@
 //
 //
 using System;
-
-using HarrisonFinance.Core.AbstractClasses;
-
-using HarrisonFinance.Core.Enums;
-
-namespace HarrisonFinance.Core
+namespace HarrisonFinance.Core.Enums
 {
-    public class CAsset : ACAsset
+    public enum eLiquidity
     {
-        
+        Instant,
+        ShortTerm,
+        MidTerm,
+        LongTerm
     }
 }

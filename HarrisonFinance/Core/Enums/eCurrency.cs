@@ -17,10 +17,10 @@ namespace HarrisonFinance.Core.Enums
     
     public enum eCurrency
     {
-        [CurrencyDescriptor(Code = "USD", Description = "Merica")]
+        [CurrencyDescriptor(Code = "USD", Symbol="$", Description = "Merica", ConversionToUSD = 1.0)]
         USD,
 
-        [CurrencyDescriptor(Code = "EUR", Description = "Not Merica")]
+        [CurrencyDescriptor(Code = "EUR", Symbol="€", Description = "Not Merica")]
         EUR
     }
 
@@ -36,11 +36,23 @@ namespace HarrisonFinance.Core.Enums
         {
             return TheCurrency.GetAttribute<CurrencyDescriptor>().Description;
         }
+
+        public static double GetConversionToUSD(this eCurrency TheCurrency)
+        {
+            return TheCurrency.GetAttribute<CurrencyDescriptor>().ConversionToUSD;
+        }
     }
 
 
     public class CurrencyDescriptor : Attribute
     {
+
+        /// <summary>
+        /// The symbol used to represent the currency.
+        /// </summary>
+        /// <value>The symbol.</value>
+        public string Symbol { get; set; }
+
         /// <summary>
         /// Gets or sets the string code used to abbreviate the currency.
         /// </summary>
