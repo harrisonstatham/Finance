@@ -1,5 +1,5 @@
 ﻿// ===========================================================
-//   IQuandlRequest.cs
+//   CAsset.cs
 //
 //   Harrison Statham
 //   Copyright Harrison Statham 2018
@@ -8,10 +8,13 @@
 //
 //
 using System;
-namespace HarrisonFinance.Core.Quandl.Interfaces
+
+using HarrisonFinance.Core.AbstractClasses;
+
+namespace HarrisonFinance.Core
 {
-    public interface IQuandlRequest
+    public class CAsset : ACAsset
     {
-        string GetURL();
+        
     }
 }

@@ -9,10 +9,10 @@
 
 using System;
 
-using HarrisonFinance.Core.Quandl.Enums;
-using HarrisonFinance.Core.Quandl.Interfaces;
+using HarrisonFinance.Common.Quandl.Enums;
+using HarrisonFinance.Common.Quandl.Interfaces;
 
-namespace HarrisonFinance.Core.Quandl
+namespace HarrisonFinance.Common.Quandl
 {
     public class CTimeSeriesRequest : IQuandlRequest
     {

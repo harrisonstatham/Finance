@@ -1,5 +1,5 @@
 ﻿using System;
-namespace HarrisonFinance.Core.Quandl.Enums
+namespace HarrisonFinance.Common.Quandl.Enums
 {
     public enum eTimeSeriesTransform
     {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
-using HarrisonFinance.Core.Quandl.Enums;
+using HarrisonFinance.Common.Quandl.Enums;
 
 using HarrisonFinance.Common.Utilities;
 
-namespace HarrisonFinance.Core.Quandl
+namespace HarrisonFinance.Common.Quandl
 {
     /// <summary>
     /// This class is responsible for parsing a JSON result from Quandl and
@@ -40,6 +40,7 @@ namespace HarrisonFinance.Core.Quandl
         public string transform { get; set; }
 
         #endregion
+
 
         #region Meta Members
 

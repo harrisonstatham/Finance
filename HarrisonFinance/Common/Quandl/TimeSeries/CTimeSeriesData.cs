@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HarrisonFinance.Core.Quandl
+namespace HarrisonFinance.Common.Quandl
 {
     //--------------------------------------------------------------------------
     //

@@ -7,9 +7,9 @@ using System.IO;
 using System.Net.Http;
 using Newtonsoft.Json;
 
-using HarrisonFinance.Core.Quandl.Interfaces;
+using HarrisonFinance.Common.Quandl.Interfaces;
 
-namespace HarrisonFinance.Core.Quandl
+namespace HarrisonFinance.Common.Quandl
 {
     public class CQuandl
     {
@@ -77,14 +77,6 @@ namespace HarrisonFinance.Core.Quandl
                 return SCTimeSeriesUtilities.ConvertToTimeSeries(Deserialized, Request);
             }
         }
-
-
-
-
-
-
-
-
 
 
         #if DEBUG

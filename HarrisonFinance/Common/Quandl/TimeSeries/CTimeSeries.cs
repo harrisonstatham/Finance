@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using HarrisonFinance.Core.Quandl.Enums;
+using HarrisonFinance.Common.Quandl.Enums;
 
-namespace HarrisonFinance.Core.Quandl
+namespace HarrisonFinance.Common.Quandl
 {
 
     //--------------------------------------------------------------------------
@@ -13,7 +13,6 @@ namespace HarrisonFinance.Core.Quandl
     public class CTimeSeries
     {
         #region Public Members
-
 
         /// <summary>
         /// The data.
@@ -36,6 +35,7 @@ namespace HarrisonFinance.Core.Quandl
 
         #endregion
 
+
         #region Constructors
 
         public CTimeSeries()
@@ -49,10 +49,8 @@ namespace HarrisonFinance.Core.Quandl
             Request = TheRequest;
         }
 
-
-
-
         #endregion
+
 
         #region Override Methods
 

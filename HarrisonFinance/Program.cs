@@ -1,9 +1,12 @@
 ﻿using System;
 
-using HarrisonFinance.Core.Quandl;
-using HarrisonFinance.Core.Quandl.Enums;
+using HarrisonFinance.Common.Quandl;
+using HarrisonFinance.Common.Quandl.Enums;
 
 using HarrisonFinance.Common.Utilities;
+
+using HarrisonFinance.Core;
+
 
 namespace HarrisonFinance
 {
@@ -17,7 +20,7 @@ namespace HarrisonFinance
             // var ApiKey = "<My API Key Here>";
             var ApiKey = System.IO.File.ReadAllText(@"/Users/harrison/Projects/HarrisonFinance/HarrisonFinance/QuandlApiKey.txt").Trim();
 
-
+            /*
             // Build a new Quandl object.
             var Quandl = new CQuandl(ApiKey);
 
@@ -28,17 +31,14 @@ namespace HarrisonFinance
             TimeSeriesRequest.Collapse = eTimeSeriesCollapse.Monthly;
             TimeSeriesRequest.Limit = 10;
 
-
-
-            #if DEBUG
-            Console.WriteLine(Quandl.BuildURL(TimeSeriesRequest));
-            #endif
-
-
             // Go fetch the results from Quandl.
             var Results = Quandl.GetTimeSeries(TimeSeriesRequest);
 
             Console.WriteLine(Results);
+            */
+
+            var asset = new CAsset();
+
 
         }
     }
