@@ -12,7 +12,7 @@ using System;
 using System.Reflection;
 using HarrisonFinance;
 
-namespace HarrisonFinance.Core.Enums
+namespace HarrisonFinance.Core
 {
     
     public enum eCurrency

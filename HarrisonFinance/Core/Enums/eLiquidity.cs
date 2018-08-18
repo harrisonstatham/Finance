@@ -8,7 +8,7 @@
 //
 //
 using System;
-namespace HarrisonFinance.Core.Enums
+namespace HarrisonFinance.Core
 {
     public enum eLiquidity
     {

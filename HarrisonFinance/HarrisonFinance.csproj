@@ -19,6 +19,7 @@
     <WarningLevel>4</WarningLevel>
     <ExternalConsole>true</ExternalConsole>
     <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <Optimize>true</Optimize>
@@ -27,6 +28,7 @@
     <WarningLevel>4</WarningLevel>
     <ExternalConsole>true</ExternalConsole>
     <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -98,7 +100,6 @@
     <Compile Include="Core\AbstractClasses\ACLiability.cs" />
     <Compile Include="Core\AbstractClasses\ACFinancialObject.cs" />
     <Compile Include="Core\CAsset.cs" />
-    <Compile Include="Core\AbstractClasses\ACCurrency.cs" />
     <Compile Include="Core\Enums\eCurrency.cs" />
     <Compile Include="Common\Enum\EnumExtensions.cs" />
     <Compile Include="Core\Enums\eAssetEnums.cs" />
@@ -109,6 +110,15 @@
     <Compile Include="Common\NumberWithUnits\eSIUnit.cs" />
     <Compile Include="Common\NumberWithUnits\eUnit.cs" />
     <Compile Include="Common\NumberWithUnits\eUnitOperationLUT.cs" />
+    <Compile Include="Core\CurrentAsset.cs" />
+    <Compile Include="Core\Interfaces\IMoney.cs" />
+    <Compile Include="Core\CPrice.cs" />
+    <Compile Include="Core\List\IListDoubleExtension.cs" />
+    <Compile Include="Core\Interfaces\IMeta.cs" />
+    <Compile Include="Core\Interfaces\IPrice.cs" />
+    <Compile Include="Core\Interfaces\ICurrency.cs" />
+    <Compile Include="Core\FundamentalTypes\Money.cs" />
+    <Compile Include="Core\FundamentalTypes\CCurrency.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -130,6 +140,9 @@
     <Folder Include="Common\Double\" />
     <Folder Include="Core\Double\" />
     <Folder Include="Common\NumberWithUnits\" />
+    <Folder Include="Core\Database\" />
+    <Folder Include="Core\List\" />
+    <Folder Include="Core\FundamentalTypes\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

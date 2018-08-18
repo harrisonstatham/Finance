@@ -10,21 +10,35 @@
 using System;
 using System.Collections.Generic;
 
-using HarrisonFinance.Core.Enums;
 
-using MathNet.Numerics;
 
-namespace HarrisonFinance.Core.AbstractClasses
+namespace HarrisonFinance.Core
 {
-    public abstract class ACFinancialObject
+    public abstract class ACFinancialObject : IMeta, IPrice
     {
 
-        #region Protected Members
+        //----------------------------------------------------------------------
+        // Meta Information
+        //
+        // Meta information describes the current financial object in readable
+        // form that might be used in conversation or documentation. 
+        //
+
+        #region IMeta Implementation
+
+        #region Member(s)
 
         /// <summary>
         /// The name of the object.
         /// </summary>
         protected string mName;
+
+        public string Name
+        {
+            get { return mName; }
+            set { mName = value; }
+        }
+
 
 
         /// <summary>
@@ -32,97 +46,201 @@ namespace HarrisonFinance.Core.AbstractClasses
         /// </summary>
         protected string mDescription;
 
-
-        /// <summary>
-        /// The price of a financial object.
-        /// </summary>
-        protected double mPrice;
-
-
-        /// <summary>
-        /// An evolution of prices stored by date.
-        /// </summary>
-        protected IDictionary<DateTime, double> mPriceHistory;
-
-
-        /// <summary>
-        /// The currency.
-        /// </summary>
-        protected eCurrency mCurrency;
-
-
-        /// <summary>
-        /// The date of acquisition/sale.
-        /// </summary>
-        protected DateTime mDate;
-
-
-        /// <summary>
-        /// The depreciation rate of the asset.
-        /// </summary>
-        protected double mDepreciationRate = 0.0;
-
-
-        /// <summary>
-        /// The appreciation rate of the asset.
-        /// </summary>
-        protected double mAppreciationRate = 0.0;
+        public string Description
+        {
+            get { return mDescription; }
+            set { mDescription = value; }
+        }
 
         #endregion
 
 
-        #region Public Members
+        #endregion
+
+
+        //----------------------------------------------------------------------
+        // Price(s)
+        //
+        // Any price(s) related to the financial object is found here.
+        //
+
+
+        #region Price Implementation
+
+        #region Members
 
         /// <summary>
-        /// Gets or sets the price.
+        /// The current price of a financial object.
         /// </summary>
-        /// <value>The price.</value>
+        protected IMoney mPrice;
+
         public double Price
         {
-            get
-            {
-                return mPrice;
-            }
+            get { return mPrice.Amount; }
 
             set
             {
                 if (value >= 0.0)
                 {
-                    mPrice = value;
+                    mPrice.Amount = value;
+                }
+                else
+                {
+                    mPrice.Amount = 0.0;
                 }
             }
         }
 
 
         /// <summary>
-        /// Gets the price history.
+        /// The purchase price of a financial object.
         /// </summary>
-        /// <value>The price history.</value>
-        public IDictionary<DateTime, double> PriceHistory => mPriceHistory;
+        protected IMoney mPurchasePrice;
 
-
-        /// <summary>
-        /// Gets or sets the currency.
-        /// </summary>
-        /// <value>The currency.</value>
-        public eCurrency Currency
+        public double PurchasePrice
         {
-            get
-            {
-                return mCurrency;
-            }
+            get { return mPurchasePrice.Amount; }
 
             set
             {
-                mCurrency = value;
+                if (value >= 0.0)
+                {
+                    mPurchasePrice.Amount = value;
+                }
+                else
+                {
+                    mPurchasePrice.Amount = 0.0;
+                }
             }
         }
 
 
+
         /// <summary>
-        /// Gets or sets the depreciation rate.
+        /// The sale price of a financial object.
         /// </summary>
-        /// <value>The depreciation rate.</value>
+        protected IMoney mSalePrice;
+
+        public double SalePrice
+        {
+            get { return mSalePrice.Amount; }
+
+            set
+            {
+                if (value >= 0.0)
+                {
+                    mSalePrice.Amount = value;
+                }
+                else
+                {
+                    mSalePrice.Amount = 0.0;
+                }
+            }
+        }
+
+
+
+        /// <summary>
+        /// An evolution of prices stored by date.
+        /// </summary>
+        protected IDictionary<DateTime, IMoney> mPriceHistory;
+
+        public IDictionary<DateTime, IMoney> PriceHistory
+        {
+            get { return mPriceHistory; }
+
+            set
+            {
+                mPriceHistory = value;
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+
+
+        //----------------------------------------------------------------------
+        // Currency
+        //
+        // Anything related to the currency that represents the value of the 
+        // financial object is found here.
+        //
+
+        #region Currency Information
+
+        #region Members
+
+        /// <summary>
+        /// The currency used to represent the value of the financial object.
+        /// </summary>
+        protected CCurrency mCurrency;
+
+        public CCurrency Currency
+        {
+            get { return mCurrency; }
+
+            set 
+            { 
+                // Convert the price to a different currency.
+                mPrice.Currency = value;
+
+                mPrice.Amount.ConvertToDifferentCurrency(Currency, value);
+
+                // Convert the purchase price
+                mPurchasePrice.Currency = value;
+
+                mPurchasePrice.Amount.ConvertToDifferentCurrency(Currency, value);
+
+                // Convert the sale price
+                mSalePrice.Currency = value;
+
+                mSalePrice.Amount.ConvertToDifferentCurrency(Currency, value);
+
+
+                // Convert the price history
+                foreach (var KVP in mPriceHistory)
+                {
+                    mPriceHistory[KVP.Key].Amount = mPriceHistory[KVP.Key].Amount.ConvertToDifferentCurrency(Currency, value);
+                }
+
+
+
+                // Finally update the currency to the new value.
+                mCurrency = value;
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+
+
+        #endregion
+
+        #endregion
+
+
+
+
+        //----------------------------------------------------------------------
+        // Appreciation and Depreciation
+        //
+        // Anything related to the appreciation or depreciation of a financial
+        // object is found here.
+        //
+
+        #region Appreciation and Depreciation
+
+        #region Members
+
+        /// <summary>
+        /// The depreciation rate of the financial object.
+        /// </summary>
+        protected double mDepreciationRate = 0.0;
+
         public double DepreciationRate
         {
             get
@@ -163,9 +281,10 @@ namespace HarrisonFinance.Core.AbstractClasses
 
 
         /// <summary>
-        /// Gets or sets the appreciation rate.
+        /// The appreciation rate of the financial object.
         /// </summary>
-        /// <value>The appreciation rate.</value>
+        protected double mAppreciationRate = 0.0;
+
         public double AppreciationRate
         {
             get
@@ -204,38 +323,116 @@ namespace HarrisonFinance.Core.AbstractClasses
             }
         }
 
+        #endregion
+
+
+        #region Methods
+
+        void PopulatePriceHistoryUsingAppreciationDepreciation()
+        {
+            
+        }
+
+        #endregion
+
+
+
+        #endregion
+
+
+        //----------------------------------------------------------------------
+        // Dates
+        //
+        // Any date conveying important information is found here.
+        //
+
+        #region Dates
+
+        #region Members
 
         /// <summary>
-        /// Gets or sets the date. 
-        /// This is the date of acquiring/selling the financial object.
+        /// The date of acquisition of a financial object.
         /// </summary>
-        /// <value>The date.</value>
-        public DateTime Date
-        {
-            get
-            {
-                return mDate;
-            }
+        /// 
+        protected DateTime mPurchaseDate;
 
-            set
-            {
-                mDate = value;
-            }
+        public DateTime PurchaseDate
+        {
+            get { return mPurchaseDate; }
+            set { mPurchaseDate = value; }
         }
 
+
+        /// <summary>
+        /// The date of sale of a financial object.
+        /// </summary>
+        protected DateTime mSaleDate;
+
+        public DateTime SaleDate
+        {
+            get { return mSaleDate; }
+            set { mSaleDate = value; }
+        }
+
+        #endregion
 
         #endregion
 
 
-        #region Public Methods
 
-        public void ConvertToCurrency(eCurrency ConvertTo)
+
+        //----------------------------------------------------------------------
+        // Cash Flows
+        //
+        // Any cash flows that are generated by the financial object
+        // are found here.
+        //
+
+        #region Cash Flows
+
+        #region Members
+
+        /// <summary>
+        /// The cash inflow an object creates.
+        /// E.g. Interest collected from the purchase of a bond.
+        /// </summary> 
+        protected IDictionary<DateTime, double> mCashInflow;
+
+        public IDictionary<DateTime, double> CashInflow
         {
-            mPrice = mPrice.ConvertToDifferentCurrency(mCurrency, ConvertTo);
-            mCurrency = ConvertTo;
+            get { return mCashInflow; }
+        }
+
+
+        /// <summary>
+        /// The cash outflow that an object creates.
+        /// E.g. maintenance expenses for equipment.
+        /// </summary>
+        protected IDictionary<DateTime, double> mCashOutflow;
+
+        public IDictionary<DateTime, double> CashOutflow
+        {
+            get { return mCashOutflow; }
+        }
+
+
+        /// <summary>
+        /// The audit status of the financial object versus time.
+        /// </summary>
+        protected IDictionary<DateTime, bool> mAuditStatus;
+
+        public IDictionary<DateTime, bool> AuditStatus
+        {
+            get { return mAuditStatus; }
         }
 
         #endregion
+
+        #endregion
+
+
+
+
 
     }
 }

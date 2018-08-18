@@ -1,5 +1,5 @@
 ﻿// ===========================================================
-//   ACOwnerEquity.cs
+//   IPrice.cs
 //
 //   Harrison Statham
 //   Copyright Harrison Statham 2018
@@ -7,13 +7,17 @@
 //
 //
 //
-using System;
 
+using System;
 
 namespace HarrisonFinance.Core
 {
-    public abstract class ACOwnerEquity : ACFinancialObject
+    public interface IPrice
     {
-        
+        double Price { get; set; }
+
+        double PurchasePrice { get; set; }
+
+        double SalePrice { get; set; }
     }
 }

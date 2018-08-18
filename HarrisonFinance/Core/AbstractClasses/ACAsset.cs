@@ -9,42 +9,61 @@
 //
 using System;
 
-using HarrisonFinance.Core.Enums;
 
-namespace HarrisonFinance.Core.AbstractClasses
+namespace HarrisonFinance.Core
 {
     public abstract class ACAsset : ACFinancialObject
     {
-        #region Protected Members
+
+        //----------------------------------------------------------------------
+        //
+        //
+
+        #region Asset Type
 
         /// <summary>
-        /// The type of the m asset.
+        /// The type of the asset.
         /// </summary>
         protected eAssetType mAssetType;
 
+        public eAssetType AssetType => mAssetType;
+
+        #endregion
+
+
+
+        //----------------------------------------------------------------------
+        //
+        //
+
+        #region Balance Sheet
 
         /// <summary>
-        /// The m asset descriptor.
+        /// The asset's balance sheet descriptor.
         /// </summary>
-        protected eAssetDescriptor mAssetDescriptor;
+        protected eAssetBalanceSheetDescriptor mAssetBalanceSheetDescriptor;
 
+        public eAssetBalanceSheetDescriptor AssetBalanceSheetDescriptor => mAssetBalanceSheetDescriptor;
+
+        #endregion
+
+
+
+        //----------------------------------------------------------------------
+        //
+        //
+
+        #region Liquidity
 
         /// <summary>
         /// The liquidity of an asset.
         /// </summary>
         protected eLiquidity mLiquidity;
 
-        #endregion
-
-
-        #region Public Members
-
-        public eAssetType AssetType => mAssetType;
-
-        public eAssetDescriptor AssetDescriptor => mAssetDescriptor;
-
         public eLiquidity Liquidity => mLiquidity;
 
         #endregion
+
+
     }
 }

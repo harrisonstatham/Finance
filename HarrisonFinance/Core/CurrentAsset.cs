@@ -1,5 +1,5 @@
 ﻿// ===========================================================
-//   CCash.cs
+//   CurrentAsset.cs
 //
 //   Harrison Statham
 //   Copyright Harrison Statham 2018
@@ -9,15 +9,16 @@
 //
 using System;
 
-using HarrisonFinance.Core.Enums;
 using HarrisonFinance.Core.AbstractClasses;
+
+using HarrisonFinance.Core.Enums;
 
 
 namespace HarrisonFinance.Core
 {
-    public class CCash : ACAsset
+    public class CurrentAsset : ACAsset
     {
-        public CCash(double Amount, eCurrency CurrencyType)
+        public CurrentAsset(double Amount, eCurrency CurrencyType)
         {
             mPrice = Amount;
             mCurrency = CurrencyType;

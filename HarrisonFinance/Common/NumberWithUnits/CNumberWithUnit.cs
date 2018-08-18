@@ -8,6 +8,7 @@
 //
 //
 using System;
+
 namespace HarrisonFinance.Common.NumberWithUnits
 {
     public class UnitIncorrectException : Exception {}

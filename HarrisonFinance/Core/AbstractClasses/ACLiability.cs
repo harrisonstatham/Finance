@@ -10,9 +10,9 @@
 using System;
 
 
-namespace HarrisonFinance.Core.AbstractClasses
+namespace HarrisonFinance.Core
 {
-    public abstract class ACLiability
+    public abstract class ACLiability : ACFinancialObject
     {
         
     }
