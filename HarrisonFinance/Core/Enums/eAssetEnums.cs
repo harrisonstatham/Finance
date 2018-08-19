@@ -96,12 +96,12 @@ namespace HarrisonFinance.Core
 
     public static class AssetDescriptorExtension
     {
-        public static string GetAssetName<T>(this T TheEnum) where T : Enum
+        public static string GetAssetName<T>(this Enum TheEnum) 
         {
             return TheEnum.GetAttribute<AssetMeta>().Name;
         }
 
-        public static string GetAssetDescription<T>(this T TheEnum) where T : Enum
+        public static string GetAssetDescription<T>(this Enum TheEnum)
         {
             return TheEnum.GetAttribute<AssetMeta>().Description;
         }

@@ -14,7 +14,7 @@ using PubSub;
 
 namespace HarrisonFinance.Core
 {
-    public interface ICurrencyUpdate {}
+    public class CCurrencyUpdate {}
 
 
     public class CCurrency : ICurrency
@@ -33,7 +33,12 @@ namespace HarrisonFinance.Core
         /// <summary>
         /// A dictionary of instances for each type of currency in eCurrency.
         /// </summary>
-        private static Dictionary<eCurrency, CCurrency> mInstances = null;
+        private static Dictionary<eCurrency, CCurrency> mInstances = new Dictionary <eCurrency, CCurrency>
+        {
+            {eCurrency.USD, new CCurrency(eCurrency.USD, 1.0)},
+            {eCurrency.EUR, new CCurrency(eCurrency.EUR, 0.5)}
+        };
+
 
         /// <summary>
         /// Get the instance of the currency that corresponds to the type of currency
@@ -43,28 +48,9 @@ namespace HarrisonFinance.Core
         /// <param name="WhichCurrency">Which currency.</param>
         public static CCurrency GetCurrency(eCurrency WhichCurrency)
         {
-            bool NeedToAddCurrency = false;
-
-            if (mInstances == null)
+            if(!mInstances.ContainsKey(WhichCurrency))
             {
-                mInstances = new Dictionary<eCurrency, CCurrency>();
-                NeedToAddCurrency = true;
-            }
-            else
-            {
-                // Is the currency already in the list of instances??
-                // If not, then lets add it here.
-
-                if (!mInstances.ContainsKey(WhichCurrency))
-                {
-                    NeedToAddCurrency = true;
-                }
-            }
-
-            // Now we add the currency (all in one spot) to the list.
-            if (NeedToAddCurrency)
-            {
-                mInstances[WhichCurrency] = new CCurrency(WhichCurrency);
+                throw new Exception("Failed to retrieve currency.");
             }
 
             return mInstances[WhichCurrency];
@@ -98,7 +84,10 @@ namespace HarrisonFinance.Core
 
         private CCurrency()
         {
-            this.Subscribe<ICurrencyUpdate>(NothingHere => {
+            this.Subscribe<CCurrencyUpdate>(NothingHere =>
+            {
+
+                Console.WriteLine("An update was processed.");
 
                 // TODO Update the currency conversion to USD here.
                 // This involves querying some database and finding out what the
@@ -108,14 +97,14 @@ namespace HarrisonFinance.Core
         }
 
 
-        private CCurrency(eCurrency TheType) : base()
+        private CCurrency(eCurrency TheType) : this()
         {
             // Call update to get the conversion rate.    
-            Update();
+            //Update();
         }
 
 
-        private CCurrency(eCurrency TheType, double ConversionToUSD) : base()
+        private CCurrency(eCurrency TheType, double ConversionToUSD) : this()
         {
             mType = TheType;
             mConversionToUSDRate = ConversionToUSD;
@@ -128,9 +117,60 @@ namespace HarrisonFinance.Core
 
         private void Update()
         {
-            
+            mConversionToUSDRate = 2.0;
         }
 
+
+        #endregion
+
+
+        #region Operator Overloads
+
+        #region Inequality & Equality Operators
+
+        public static bool operator ==(CCurrency A, CCurrency B)
+        {
+            return A.Type == B.Type;
+        }
+
+        public static bool operator !=(CCurrency A, CCurrency B)
+        {
+            return A.Type != B.Type;
+        }
+
+        #endregion
+
+
+        #region Cast Operator
+
+
+        /// <summary>
+        /// Easily convert a eCurrency into a CCurrency object.
+        /// Just for convenience.
+        /// </summary>
+        /// <returns>The explicit.</returns>
+        /// <param name="TheCurrency">The currency.</param>
+        public static explicit operator CCurrency(eCurrency TheCurrency)
+        {
+            return CCurrency.GetCurrency(TheCurrency);
+        }
+
+        #endregion
+
+
+        #region Misc Overloads
+
+        public override string ToString()
+        {
+            return string.Format("{0} ({1})\n", Type.GetCurrencyCode(), Type.GetCurrencySymbol());
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        #endregion
 
         #endregion
     }

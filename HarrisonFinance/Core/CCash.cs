@@ -9,15 +9,12 @@
 //
 using System;
 
-using HarrisonFinance.Core.Enums;
-using HarrisonFinance.Core.AbstractClasses;
-
 
 namespace HarrisonFinance.Core
 {
     public class CCash : ACAsset
     {
-        public CCash(double Amount, CCurrency CurrencyType)
+        public CCash(double Amount, eCurrency CurrencyType)
         {
             Price = Amount;
             Currency = CurrencyType;

@@ -10,8 +10,6 @@
 using System;
 using System.Collections.Generic;
 
-using HarrisonFinance.Core.AbstractClasses;
-using HarrisonFinance.Core.Enums;
 
 namespace HarrisonFinance.Core.FinancialStatements
 {

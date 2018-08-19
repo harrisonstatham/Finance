@@ -7,6 +7,7 @@ using HarrisonFinance.Common.Utilities;
 
 using HarrisonFinance.Core;
 
+using PubSub;
 
 namespace HarrisonFinance
 {
@@ -37,8 +38,22 @@ namespace HarrisonFinance
             Console.WriteLine(Results);
             */
 
-            var asset = new CAsset();
+            var M1 = new CMoney(100.0, eCurrency.USD);
+            var C1 = CCurrency.GetCurrency(eCurrency.USD);
 
+
+            Console.WriteLine("These two lines should be the same.");
+            Console.WriteLine(M1.Currency.ConversionToUSDRate);
+            Console.WriteLine(C1.ConversionToUSDRate);
+
+
+            var Temp = "String";
+            Temp.Publish(new CCurrencyUpdate());
+
+
+            Console.WriteLine("The lines below should be the same BUT different from above.");
+            Console.WriteLine(M1.Currency.ConversionToUSDRate);
+            Console.WriteLine(C1.ConversionToUSDRate);
 
 
         }

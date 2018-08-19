@@ -9,6 +9,7 @@
 //
 using System;
 
+using PubSub;
 
 
 namespace HarrisonFinance.Core
@@ -36,26 +37,26 @@ namespace HarrisonFinance.Core
         /// </summary>
         private CCurrency mCurrency;
 
-        public CCurrency Currency 
-        {
-            get;
-            set;
-        }
+        public CCurrency Currency => mCurrency;
 
 
         /// <summary>
         /// Converts to another currency.
         /// </summary>
         /// <param name="TheNewCurrency">The new currency.</param>
-        public void ConvertToAnotherCurrency(CCurrency TheNewCurrency)
+        public void ConvertToCurrency(eCurrency TheNewCurrency)
         {
             // Get the latest currency rates.
-            /// TODO Implement the code that gets the current currency rate.
+            this.Publish<CCurrencyUpdate>();
+
+            // Cache the current conversion rate.
+            double CurrentConversionRate = Currency.ConversionToUSDRate;
+
+            // Get the instance of the currency.
+            mCurrency = CCurrency.GetCurrency(TheNewCurrency);
 
             // Convert the USD to the new currency.
-            Amount *= Currency.ConversionToUSDRate * TheNewCurrency.ConversionToUSDRate;
-            Currency = TheNewCurrency;
-
+            Amount *= CurrentConversionRate * Currency.ConversionToUSDRate;
         }
 
 
@@ -65,11 +66,45 @@ namespace HarrisonFinance.Core
 
         #region Constructor(s)
 
-        public CMoney(double TheAmount, CCurrency TheCurrency)
+        public CMoney(double TheAmount, eCurrency TheCurrency)
         {
-            Amount = TheAmount;
-            Currency = TheCurrency;
+            mAmount = TheAmount;
+            mCurrency = CCurrency.GetCurrency(TheCurrency);
         }
+
+
+        #endregion
+
+        #region Operator Overloads
+
+
+
+        // We can add and subtract money easily.
+
+        #region Addition
+
+        public static CMoney operator +(CMoney A, CMoney B)
+        {
+            // We need an apples-to-apples comparison.
+            // The currencies must be of the same to be able to add them.
+            //
+            // If given two different currencies, return USD no matter what.
+
+            if(A.Currency != B.Currency)
+            {
+                A.ConvertToAnotherCurrency(eCurrency.USD);
+                B.ConvertToAnotherCurrency(eCurrency.USD);
+            }
+
+            // Now that the monies are in the same currencies, we can
+            // successfully add both of them.
+
+            return new CMoney(A.Amount + B.Amount, A.Currency.Type);
+        }
+
+
+
+        #endregion
 
 
         #endregion

@@ -28,14 +28,19 @@ namespace HarrisonFinance.Core
 
     public static class eCurrencyExtensions
     {
-        public static string GetCode(this eCurrency TheCurrency)
+        public static string GetCurrencyCode(this eCurrency TheCurrency)
         {
             return TheCurrency.GetAttribute<CurrencyDescriptor>().Code;
         }
 
-        public static string GetDescription(this eCurrency TheCurrency)
+        public static string GetCurrencyDescription(this eCurrency TheCurrency)
         {
             return TheCurrency.GetAttribute<CurrencyDescriptor>().Description;
+        }
+
+        public static string GetCurrencySymbol(this eCurrency TheCurrency)
+        {
+            return TheCurrency.GetAttribute<CurrencyDescriptor>().Symbol;
         }
     }
 

@@ -177,38 +177,19 @@ namespace HarrisonFinance.Core
         /// </summary>
         protected CCurrency mCurrency;
 
-        public CCurrency Currency
+        public eCurrency Currency
         {
-            get { return mCurrency; }
+            get { return mCurrency.Type; }
 
             set 
             { 
                 // Convert the price to a different currency.
-                mPrice.Currency = value;
 
-                mPrice.Amount.ConvertToDifferentCurrency(Currency, value);
-
-                // Convert the purchase price
-                mPurchasePrice.Currency = value;
-
-                mPurchasePrice.Amount.ConvertToDifferentCurrency(Currency, value);
-
-                // Convert the sale price
-                mSalePrice.Currency = value;
-
-                mSalePrice.Amount.ConvertToDifferentCurrency(Currency, value);
-
-
-                // Convert the price history
-                foreach (var KVP in mPriceHistory)
-                {
-                    mPriceHistory[KVP.Key].Amount = mPriceHistory[KVP.Key].Amount.ConvertToDifferentCurrency(Currency, value);
-                }
 
 
 
                 // Finally update the currency to the new value.
-                mCurrency = value;
+                mCurrency = CCurrency.GetCurrency(value);
             }
         }
 

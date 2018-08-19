@@ -9,10 +9,6 @@
 //
 using System;
 
-using HarrisonFinance.Core.AbstractClasses;
-
-using HarrisonFinance.Core.Enums;
-
 
 namespace HarrisonFinance.Core
 {
@@ -20,8 +16,8 @@ namespace HarrisonFinance.Core
     {
         public CurrentAsset(double Amount, eCurrency CurrencyType)
         {
-            mPrice = Amount;
-            mCurrency = CurrencyType;
+            mPrice.Amount = Amount;
+            mCurrency = (CCurrency)CurrencyType;
 
             mLiquidity = eLiquidity.Instant;
             mAssetType = eAssetType.Current;
