@@ -17,7 +17,7 @@ namespace HarrisonFinance.Core
         /// The type of currency described by an enum.
         /// </summary>
         /// <value>The type.</value>
-        eCurrency Type { get; set; }
+        eCurrency Type { get; }
 
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace HarrisonFinance.Core
         /// We normalize to USD for convenience when cross converting currency.
         /// </summary>
         /// <value>The conversion to USDR ate.</value>
-        double ConversionToUSDRate { get; set; }
+        double ConversionToUSDRate { get; }
 
     }
 }

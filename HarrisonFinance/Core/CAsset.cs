@@ -9,9 +9,7 @@
 //
 using System;
 
-using HarrisonFinance.Core.AbstractClasses;
 
-using HarrisonFinance.Core.Enums;
 
 namespace HarrisonFinance.Core
 {

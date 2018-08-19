@@ -17,10 +17,10 @@ namespace HarrisonFinance.Core
 {
     public class CCash : ACAsset
     {
-        public CCash(double Amount, eCurrency CurrencyType)
+        public CCash(double Amount, CCurrency CurrencyType)
         {
-            mPrice = Amount;
-            mCurrency = CurrencyType;
+            Price = Amount;
+            Currency = CurrencyType;
 
             mLiquidity = eLiquidity.Instant;
             mAssetType = eAssetType.Current;
