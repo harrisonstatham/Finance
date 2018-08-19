@@ -117,7 +117,7 @@
     <Compile Include="Core\Interfaces\IMeta.cs" />
     <Compile Include="Core\Interfaces\IPrice.cs" />
     <Compile Include="Core\Interfaces\ICurrency.cs" />
-    <Compile Include="Core\FundamentalTypes\Money.cs" />
+    <Compile Include="Core\FundamentalTypes\CMoney.cs" />
     <Compile Include="Core\FundamentalTypes\CCurrency.cs" />
   </ItemGroup>
   <ItemGroup>

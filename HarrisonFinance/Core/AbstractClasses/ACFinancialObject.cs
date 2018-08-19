@@ -236,6 +236,7 @@ namespace HarrisonFinance.Core
 
         #region Members
 
+
         /// <summary>
         /// The depreciation rate of the financial object.
         /// </summary>
@@ -328,9 +329,27 @@ namespace HarrisonFinance.Core
 
         #region Methods
 
-        void PopulatePriceHistoryUsingAppreciationDepreciation()
+        void PopulatePriceHistoryUsingAppreciationDepreciation(TimeSpan TimeIncrement)
         {
-            
+            // Clear out any data that might exist.
+            mPriceHistory.Clear();
+
+            DateTime Current = PurchaseDate;
+            CMoney TheValue;
+
+            while(Current <= EndOfLifetime)
+            {
+                TheValue = new CMoney(Price, Currency);
+
+                // Use the appreciation/depreciation equation to calculate the
+                // current value of the asset at the given time.
+                /// TODO Put formula for appreciation/depreciation here and update.
+
+                mPriceHistory.Add(Current, TheValue);
+
+                // Increment the current time by the time span given to us.
+                Current += TimeIncrement;
+            }
         }
 
         #endregion
@@ -373,6 +392,21 @@ namespace HarrisonFinance.Core
             get { return mSaleDate; }
             set { mSaleDate = value; }
         }
+
+
+        /// <summary>
+        /// The end of the lifetime of the financial object.
+        /// This is used in the 
+        /// </summary>
+        protected DateTime mEndOfLifetime;
+
+        public DateTime EndOfLifetime
+        {
+            get { return mEndOfLifetime; }
+            set { mEndOfLifetime = value; }
+        }
+
+
 
         #endregion
 

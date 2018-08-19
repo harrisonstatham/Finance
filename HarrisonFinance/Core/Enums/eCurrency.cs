@@ -14,16 +14,17 @@ using HarrisonFinance;
 
 namespace HarrisonFinance.Core
 {
-    
+
     public enum eCurrency
     {
-        [CurrencyDescriptor(Code = "USD", Symbol="$", Description = "Merica", ConversionToUSD = 1.0)]
+        [CurrencyDescriptor(Code = "USD", Symbol = "$", Description = "United States Dollars")]
         USD,
 
-        [CurrencyDescriptor(Code = "EUR", Symbol="€", Description = "Not Merica")]
+        [CurrencyDescriptor(Code = "EUR", Symbol = "€", Description = "European Union Euro")]
         EUR
     }
 
+    #region eCurrency Enum Decorators
 
     public static class eCurrencyExtensions
     {
@@ -35,11 +36,6 @@ namespace HarrisonFinance.Core
         public static string GetDescription(this eCurrency TheCurrency)
         {
             return TheCurrency.GetAttribute<CurrencyDescriptor>().Description;
-        }
-
-        public static double GetConversionToUSD(this eCurrency TheCurrency)
-        {
-            return TheCurrency.GetAttribute<CurrencyDescriptor>().ConversionToUSD;
         }
     }
 
@@ -65,12 +61,7 @@ namespace HarrisonFinance.Core
         /// </summary>
         /// <value>The description.</value>
         public string Description { get; set; }
-
-
-        /// <summary>
-        /// Gets or sets the conversion to usd.
-        /// </summary>
-        /// <value>The conversion to usd.</value>
-        public double ConversionToUSD { get; set; }
     }
+
+    #endregion
 }

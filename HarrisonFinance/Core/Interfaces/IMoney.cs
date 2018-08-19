@@ -21,9 +21,16 @@ namespace HarrisonFinance.Core
 
 
         /// <summary>
-        /// Gets or sets the currency.
+        /// Gets or sets the currency used to represent the value.
         /// </summary>
         /// <value>The currency.</value>
         CCurrency Currency { get; set; }
+
+
+        /// <summary>
+        /// Converts to another currency.
+        /// </summary>
+        /// <param name="TheNewCurrency">The new currency.</param>
+        void ConvertToAnotherCurrency(CCurrency TheNewCurrency);
     }
 }
