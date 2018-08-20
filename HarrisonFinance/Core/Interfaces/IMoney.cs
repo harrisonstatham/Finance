@@ -31,6 +31,6 @@ namespace HarrisonFinance.Core
         /// Converts to another currency.
         /// </summary>
         /// <param name="TheNewCurrency">The new currency.</param>
-        void ConvertToAnotherCurrency(eCurrency TheNewCurrency);
+        void ConvertToCurrency(eCurrency TheNewCurrency);
     }
 }

@@ -153,6 +153,7 @@
     <Reference Include="PubSub">
       <HintPath>..\packages\PubSub.2.0.0\lib\netstandard1.1\PubSub.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Core\Interfaces\ICurrency.cs" />
     <Compile Include="Core\FundamentalTypes\CMoney.cs" />
     <Compile Include="Core\FundamentalTypes\CCurrency.cs" />
+    <Compile Include="UnitTests\Common\Enum\EnumTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -225,6 +227,11 @@
     <Folder Include="Core\Database\" />
     <Folder Include="Core\List\" />
     <Folder Include="Core\FundamentalTypes\" />
+    <Folder Include="UnitTests\" />
+    <Folder Include="UnitTests\Common\" />
+    <Folder Include="UnitTests\Core\" />
+    <Folder Include="UnitTests\Common\Quandl\" />
+    <Folder Include="UnitTests\Common\Enum\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

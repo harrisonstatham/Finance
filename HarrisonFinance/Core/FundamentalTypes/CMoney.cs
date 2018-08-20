@@ -92,8 +92,8 @@ namespace HarrisonFinance.Core
 
             if(A.Currency != B.Currency)
             {
-                A.ConvertToAnotherCurrency(eCurrency.USD);
-                B.ConvertToAnotherCurrency(eCurrency.USD);
+                A.ConvertToCurrency(eCurrency.USD);
+                B.ConvertToCurrency(eCurrency.USD);
             }
 
             // Now that the monies are in the same currencies, we can
@@ -101,8 +101,6 @@ namespace HarrisonFinance.Core
 
             return new CMoney(A.Amount + B.Amount, A.Currency.Type);
         }
-
-
 
         #endregion
 

@@ -25,5 +25,21 @@ namespace HarrisonFinance
 
             return type.GetField(name).GetCustomAttribute<TAttribute>();
         }
+
+        public static string GetName(this Enum value)
+        {
+            return value.GetAttribute<EnumMeta>().Name;
+        }
+
+        public static string GetDescription(this Enum value)
+        {
+            return value.GetAttribute<EnumMeta>().Description;
+        }
+    }
+
+    public class EnumMeta : Attribute
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
