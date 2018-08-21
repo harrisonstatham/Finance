@@ -50,9 +50,6 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
-    <Reference Include="Google.Protobuf">
-      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.8.0.12\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
@@ -154,6 +151,12 @@
       <HintPath>..\packages\PubSub.2.0.0\lib\netstandard1.1\PubSub.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework" />
+    <Reference Include="Google.Protobuf">
+      <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoCoordinate.NetCore">
+      <HintPath>..\packages\GeoCoordinate.NetCore.1.0.0.1\lib\netstandard1.6\GeoCoordinate.NetCore.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -203,6 +206,15 @@
     <Compile Include="Core\FundamentalTypes\CMoney.cs" />
     <Compile Include="Core\FundamentalTypes\CCurrency.cs" />
     <Compile Include="UnitTests\Common\Enum\EnumTests.cs" />
+    <Compile Include="Core\FinancialDataInterface\CFinancialDataInterface.cs" />
+    <Compile Include="Core\AbstractClasses\ACInstitution.cs" />
+    <Compile Include="Core\Enums\eCountry.cs" />
+    <Compile Include="Core\Interfaces\ILocation.cs" />
+    <Compile Include="Common\CTriplet.cs" />
+    <Compile Include="Common\CPair.cs" />
+    <Compile Include="Core\Enums\eState.cs" />
+    <Compile Include="Core\Enums\eCounty.cs" />
+    <Compile Include="Core\Enums\eProvidence.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -232,6 +244,7 @@
     <Folder Include="UnitTests\Core\" />
     <Folder Include="UnitTests\Common\Quandl\" />
     <Folder Include="UnitTests\Common\Enum\" />
+    <Folder Include="Core\FinancialDataInterface\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

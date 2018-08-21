@@ -14,6 +14,7 @@ using PubSub;
 
 namespace HarrisonFinance.Core
 {
+    // An empty object used for signaling that some currency needs to be updated.
     public class CCurrencyUpdate {}
 
 
@@ -86,9 +87,6 @@ namespace HarrisonFinance.Core
         {
             this.Subscribe<CCurrencyUpdate>(NothingHere =>
             {
-
-                Console.WriteLine("An update was processed.");
-
                 // TODO Update the currency conversion to USD here.
                 // This involves querying some database and finding out what the
                 // current exchange rate is and updating the currency accordingly.
@@ -117,7 +115,7 @@ namespace HarrisonFinance.Core
 
         private void Update()
         {
-            mConversionToUSDRate = 2.0;
+            
         }
 
 
@@ -168,6 +166,11 @@ namespace HarrisonFinance.Core
         public override bool Equals(object obj)
         {
             return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         #endregion

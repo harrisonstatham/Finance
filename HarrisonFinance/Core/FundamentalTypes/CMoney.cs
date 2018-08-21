@@ -6,7 +6,7 @@
 //
 //   
 //
-//
+
 using System;
 
 using PubSub;
@@ -75,14 +75,20 @@ namespace HarrisonFinance.Core
 
         #endregion
 
+
+
         #region Operator Overloads
-
-
-
-        // We can add and subtract money easily.
 
         #region Addition
 
+
+        /// <summary>
+        /// Adds a <see cref="HarrisonFinance.Core.CMoney"/> to a <see cref="HarrisonFinance.Core.CMoney"/>, yielding a
+        /// new <see cref="T:HarrisonFinance.Core.CMoney"/>.
+        /// </summary>
+        /// <param name="A">The first <see cref="HarrisonFinance.Core.CMoney"/> to add.</param>
+        /// <param name="B">The second <see cref="HarrisonFinance.Core.CMoney"/> to add.</param>
+        /// <returns>The <see cref="T:HarrisonFinance.Core.CMoney"/> that is the sum of the values of <c>A</c> and <c>B</c>.</returns>
         public static CMoney operator +(CMoney A, CMoney B)
         {
             // We need an apples-to-apples comparison.
@@ -90,7 +96,7 @@ namespace HarrisonFinance.Core
             //
             // If given two different currencies, return USD no matter what.
 
-            if(A.Currency != B.Currency)
+            if (A.Currency != B.Currency)
             {
                 A.ConvertToCurrency(eCurrency.USD);
                 B.ConvertToCurrency(eCurrency.USD);
@@ -104,6 +110,62 @@ namespace HarrisonFinance.Core
 
         #endregion
 
+        #region Subtraction
+
+        public static CMoney operator -(CMoney A, CMoney B)
+        {
+
+            // Again convert to the same currency.
+            if (A.Currency != B.Currency)
+            {
+                A.ConvertToCurrency(eCurrency.USD);
+                B.ConvertToCurrency(eCurrency.USD);
+            }
+
+            return new CMoney(A.Amount - B.Amount, A.Currency.Type);
+        }
+
+
+        #endregion
+
+        #region Multiplication
+
+        public static CMoney operator *(CMoney A, int B)
+        {
+            return A * (double)B;
+        }
+
+        public static CMoney operator *(int A, CMoney B)
+        {
+            return B * A;
+        }
+
+        public static CMoney operator *(CMoney A, double B)
+        {
+            return new CMoney(A.Amount * B, A.Currency.Type);
+        }
+
+        public static CMoney operator *(double A, CMoney B)
+        {
+            return B * A;
+        }
+
+
+        #endregion
+
+        #region Division
+
+        public static CMoney operator /(CMoney A, int B)
+        {
+            return A * (double)B;
+        }
+
+        public static CMoney operator /(CMoney A, double B)
+        {
+            return new CMoney(A.Amount * B, A.Currency.Type);
+        }
+
+        #endregion
 
         #endregion
 

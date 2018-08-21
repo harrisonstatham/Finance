@@ -1,5 +1,5 @@
 ﻿// ===========================================================
-//   CAsset.cs
+//   eCounty.cs
 //
 //   Harrison Statham
 //   Copyright Harrison Statham 2018
@@ -9,11 +9,9 @@
 
 using System;
 
-
-
-namespace HarrisonFinance.Core
+namespace HarrisonFinance
 {
-    public class CAsset : ACAsset
+    public enum eCounty
     {
         
     }
